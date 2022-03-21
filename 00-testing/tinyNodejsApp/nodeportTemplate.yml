@@ -1,0 +1,17 @@
+apiVersion : v1                    # The API version
+kind: Service                      # The external network access as a service
+# ------------------------  Meta Data -----------------------------------------
+metadata:
+  name: <Name of this object>      # The name of this particular Nodeport Service
+  namespace: <YOUR NAMESPACE>      # Please enter your namespace here e.g the prefix of your email
+# --------------------------- Specificfations ----------------------------------
+spec:
+  selector:
+    app: tinyapp                # This Service serves the pods labeled tinyapp
+  type: NodePort                # I'am just a nodeport (but I can load-balance between the pods)
+  ports:                        # Could be more than one port mapping
+     - port: 7000                 # the port the service exposes within the cluster. As each service
+                                  # gets a unique private IP address, port 7000 must not be unique
+      protocol: TCP               # the default protocol
+      targetPort: 6002            # the port the Pod App is listening to (tinyapp listens to 6002)
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#service-v1-core

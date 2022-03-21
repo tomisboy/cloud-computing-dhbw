@@ -1,0 +1,13 @@
+---
+applications:                     # Hier kann man eine oder mehrere CF Anwendungen definiert werden
+- name: dhbwtinyApp               # Der Name der App wird als subdomain in den DNS eingetragen
+  disk_quota: 512M               # Der Größe der root Disk auf der das droplet dann aufgesetzt wird
+  path: .                         # Der Pfad vom dem die Node.js App geladen werden soll (also lokale Disk)
+  instance: 1                     # Anzahl der Instanzen ( = # Anzahl der Container).. hier immer stateless App
+  memory: 256M                    # Memory Allocation
+  stack: cflinuxfs3               # der OS Stack cflinuxfs3: wird von IBM als Cloud Provider empfohlen
+  buildpacks:                     # Der Name der Scripts die aus unserem Code ein Droplet baut
+    - https://github.com/cloudfoundry/nodejs-buildpack
+  routes:
+    - route: example-com-js.eu-de.mybluemix.net  # Andere Routes sind möglich müssen aber in eine IBM Cloud Domain
+# https://docs.cloudfoundry.org/devguide/deploy-apps/manifest-attributes.html

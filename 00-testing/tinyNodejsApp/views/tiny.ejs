@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<%
+  var titel = "DHBW Cloud tiny App";   // der Titel der Home Page
+  var Poster = "url('/images/Spiele/logodhbw.svg');";
+  var backimageHorizontal = "/images/Spiele/Sylt-3-Horizontal.jpeg";
+  var backimageVertikal = "/images/Spiele/Sylt-3-Vertikal.jpeg";
+  var backimageQuadrat = "/images/Spiele/Sylt-3-Quadrat.jpeg";
+  var backcolor = "rgba(255, 255, 255,0.2);";
+  if (environment) {var protocol = "http"} else {var protocol = "https"}
+  if (host.substr(0,9) == "localhost") {var cloudhost = protocol + "://" + host; }
+    else { var cloudhost = protocol + "://" + host;}
+  var foot = footprint;
+%>
+<!-- This HTMl is the Main HTML for the DHBW Spiele App
+-->
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 minimum-scale=1.0 maximum-scale=1.0 user-scalable=no">
+<link rel="shortcut icon" href="<%= cloudhost %>/images/Spiele/logodhbw.svg">
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" type="text/css" href="./stylesheets/mainstyle.css">
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="./js/Spiele/Main.js"></script>
+<title>DHBW Cloud Tiny Node.JS App</title>
+</head>
+<body>
+  <div id="page" data-role="page" data-url="">
+    <div id="gridcontainer" class="pagegridcontainer" style ="position:fixed; width:100%; height:100%">
+      <div id="spinning" style="display:flex; position: absolute;justify-content: center;align-items: center;width:100%; height:100%">
+      <img style="width:50%;min-width:80px;max-width:250px;background-color: rgba(0,0,0,0.5);border-radius: 20px; padding:2em; border:2px solid white;
+        " src="./images/index.rotating-balls-spinner.svg">
+    </div>
+<!--
+     Fixed <header>
+-->
+    <div id="headerfix" style="position:relative; z-index:10; width:100%;" class="pagegridheader">
+      <header id="header" class="flexboxheader" style="background: linear-gradient(to right, #fcfc06 , #0c06b9)">
+        <a style="max-width:200px; min-width:50px; width:40%; padding: 2px 2px 1px 20px" href="#" onclick="$('#chatroom').show();">
+          <img  id="Logo" style="width:100%; padding:0;" src="<%= cloudhost %>/images/Spiele/logodhbw.svg" alt="BrytTec"></a>
+        <div style="max-width:400px; min-width:100px ; width:60%;" class="header"><%= titel %></div>
+      </header>
+  </div>
+ <!-- Alert Popup
+ -->
+ <div id="myalert" style="display:none; position:fixed;" class ="alertContainer"></div>
+ <!--  Scrollable Area
+
+ -->
+ <div id="back" backimageHorizontal="<%= backimageHorizontal %>"
+                backimageVertikal="<%= backimageVertikal %>"
+                backimageQuadrat= "<%= backimageQuadrat %>"
+     style=" background-size:cover;background-position:center;background-repeat:no-repeat; "
+     class="pagegridsrcol">
+ <div id="scrollable" class="pagegridsrcol"
+   style="width: 100%; position:relative; overflow:auto;">
+<!--
+
+  Chat Box
+-->
+<div id="chatroomDiv" class="flexsingletopcentral" style="width:100%; height:100%; padding:0.4em;">
+  <div id="chatroom" style="position: relative; background-color: rgba(243,243,243,0.7); min-width: 300px; max-width:800px; width:70%;padding:0.8em;display:none;"
+    data-theme="a" class="ui-corner-all">
+    <div class="flexboxheader">
+    <a href="#" onclick="$(this).parent().parent().hide();" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext"></a>
+    <div style="width:10%;min-width: 60px;max-width:70px;"class="flexboxheader">
+   </div>
+  </div>
+    <div id="chatheader" class="flexboxheader" style="background: linear-gradient(to left, #eee , #000);padding:1em">
+      <img  id="Logo" style="min-width:50px;max-width:150px; width:15%; padding-left:5px;" src="<%= cloudhost %>/images/Spiele/logodhbw.svg" alt="BrytTec"></a>
+      <p id="chatheadertext" style="color:white; min-width:150px; max-width:400px; width:80%; text-align: left;padding-left:5px;">DHBW Cloud Gurus</p>
+     <div id="chatspace" style="padding-top:1.5em;overflow:auto;">
+      <ul></ul>
+    </div>
+  </div>
+</div>
+</div>
+<!--
+     Basic Popup Window to show various things
+-->
+<div id="showwindowDiv" class="bryttecpopuplargewhite hideit" style="display:none">
+  <a href="#" onclick="$(this).parent().hide();" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext"></a>
+  <div id="showwindow" style="padding: 1em"></div>
+</div>
+</div>
+</div>
+<!--
+
+        Footer
+-->
+<footer id="footer" class="footer flexboxheader pagegridsfooter">
+  <a href="#" data-rel="popup" id="ImpressumNav" style="border:none;"
+   class="footernav ui-btn ui-shadow ui-btn-b">Impressum</a>
+  <p style="padding-right:1em;font-size:0.8em"><%= foot %>Copyright &copy 2021 DHBW Cloud Course</p>
+ </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+apiVersion: apps/v1  #  API Endpoint for this object
+kind: Deployment     #  Type of the object in our case a deloyment object
+# ------------------------------ Meta Data of the Deployment Object
+metadata:            #  Every object has a meta area and a specification or template section
+  name: <your name>  # Name the deployment object (we may add additional labels)
+  namespace: <YOUR NAMESPACE> # Please enter your namespace here e.g the prefix of your email
+  labels:
+    project: cloudcourse #Any Label you would like to make your Objec descriptive
+# ----------------------------------------------------------------------------------------------------------------
+spec:                #  The specs of a deplyoment includes the replicaset the pod and the container.
+                     #  https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#deploymentspec-v1-apps
+  replicas: 2        #  We scale up to two Pods (Replicaset)
+  selector:          #  Here we select the template with the key app and the value tinyapp
+    matchLabels:     #  the labels must match
+      app: tinyapp
+  template:          # template for a single pod (replicated two times)
+    metadata:        # meta data of a single pod
+      labels:
+        app: tinyapp   # this pod is part of the replica set above
+    spec:
+      nodeSelector:      # many options to assign a pod to a node, this one uses a label
+        mynode: mynode   # as I labeled our (single) node accordingly. Kube should find the only one..
+      containers:        # one for each pod (here we could have more than one container per pod, e.g. side-car pattern)
+      - name: containerfortinyapp  #  a name of the container
+        image: juergenschneider/dhbwkubernetes:tiny  # the docker image.. it is public you could use this image
+        imagePullPolicy: Always  # always reload the image from the repository
