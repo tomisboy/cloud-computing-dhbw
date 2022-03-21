@@ -1,0 +1,9 @@
+---
+  version: '3.7'
+
+  services:
+    nodetest:
+      image: local/tinynodejsapp:latest
+      container_name: tinyNodejsApp-node
+      ports:
+        - 80:6002
